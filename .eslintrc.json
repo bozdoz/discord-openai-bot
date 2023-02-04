@@ -1,0 +1,15 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  },
+  "rules": {
+    // my whole life is a useless escape
+    "no-useless-escape": "off"
+  }
+}
