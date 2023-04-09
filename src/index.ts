@@ -35,16 +35,16 @@ client.on('messageCreate', async (msg) => {
 
       console.log(prompt)
 
-      const choices = await ask(prompt)
+      const answer = await ask(prompt)
 
-      console.log(choices)
+      console.log(answer)
 
-      let response = choices.map((choice) => choice.text).join('\n\n')
+      let response = answer.text
 
       // dumbass bot
-      response = response.replace(botPrefix, '')
+      // response = response.replace(botPrefix, '')
 
-      if (choices[0].finish_reason === 'length') {
+      if (answer.finish_reason === 'length') {
         response = `${response}....  Sorry, I ran out of tokens, possibly because ${getUserMention(
           process.env.ME || ''
         )} is too cheap`
@@ -64,21 +64,20 @@ client.on('messageCreate', async (msg) => {
 })
 
 const botPrefix = 'You said: '
+const botResponsePrefix = 'You say: '
 
 const getContext = async (msg: Message<boolean>, content: string) => {
   const references = await applyReferences(msg, content)
 
-  if (msg.reference == null) {
-    return references
-  }
+  // if (msg.reference == null) {
+  //   return references
+  // }
 
-  return `You are in a chat room.  
+  return `You are in a chat room.
 
-Your previous responses are prefixed by "${botPrefix}".
+${references}
 
-Below is a transcript of what was said; what is your response?
-
-${references}`
+${botResponsePrefix}`
 }
 
 const cleanUserMention = (content: string) =>
@@ -93,7 +92,7 @@ const getAuthorPrefix = (msg: Message<boolean>): string => {
     return botPrefix
   }
 
-  return `${getUserMention(msg.author.id)} said: `
+  return `${getUserMention(msg.author.id)} said:`
 }
 
 const applyReferences = async (
