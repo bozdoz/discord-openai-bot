@@ -5,3 +5,8 @@ services:
     build: .
     restart: on-failure:3
     env_file: .env
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 10M
