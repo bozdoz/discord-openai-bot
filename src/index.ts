@@ -14,10 +14,10 @@ const client = new Client({
 client.on('messageCreate', async (msg) => {
   const { author, mentions, content, channel } = msg
 
-  // don't listen to any bot
-  if (author.bot) {
-    return
-  }
+  // don't listen to any bot (OK, maybe let the bots talk)
+  // if (author.bot) {
+  //   return
+  // }
 
   const clientUserId = client.user?.id || ''
 
