@@ -33,11 +33,7 @@ client.on('messageCreate', async (msg) => {
       // if in a reply thread
       const prompt = await getContext(msg, stripped)
 
-      console.log(prompt)
-
       const answer = await ask(prompt)
-
-      console.log(answer)
 
       let response = answer.text
 
